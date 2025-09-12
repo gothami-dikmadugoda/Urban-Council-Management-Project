@@ -1,0 +1,223 @@
+Receptionist Dashboard system design plan in English, covering UI/UX elements, database integration (using PHP, MySQL via phpMyAdmin/XAMPP), and functionality using HTML, CSS, Bootstrap, JS, and PHP.
+
+⸻
+
+Receptionist Dashboard – Full System Overview
+
+Technologies Used:
+	•	Frontend: HTML, CSS, Bootstrap 5, JavaScript, FullCalendar.js
+	•	Backend: PHP (Core PHP, MySQLi or PDO)
+	•	Database: MySQL (via phpMyAdmin/XAMPP)
+	•	Reports: Optional Crystal Report-style export (use PDF generation like Dompdf or TCPDF)
+
+⸻
+
+1. Dashboard Layout Overview:
+	•	Left Sidebar (Navigation Bar):
+	•	Calendar
+	•	Visitors
+	•	Appointments
+	•	Status
+	•	Reports
+	•	Right Content Area (Dynamic Content):
+	•	Displays components based on nav selection.
+
+⸻
+
+2. Calendar (with FullCalendar Integration)
+
+Functionality:
+	•	Display all bookings from the bookings table (inside urban_council DB).
+	•	Enable Add/Edit/Delete via modal or inline form.
+
+Steps:
+	1.	Install FullCalendar (via CDN or npm):
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+
+
+	2.	Fetch Booking Events from PHP/MySQL:
+
+$query = "SELECT * FROM bookings";
+$result = mysqli_query($conn, $query);
+$events = [];
+while($row = mysqli_fetch_assoc($result)) {
+    $events[] = [
+        'id' => $row['id'],
+        'title' => $row['title'],
+        'start' => $row['start_time'],
+        'end' => $row['end_time']
+    ];
+}
+echo json_encode($events);
+
+
+	3.	Render Calendar:
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        initialView: 'dayGridMonth',
+        events: 'get_events.php',
+        editable: true,
+        selectable: true,
+        // Add handlers for click, drag, etc.
+    });
+    calendar.render();
+});
+
+
+
+⸻
+
+3. Visitors Section
+
+Visitors Form (Create):
+
+Fields:
+	•	Name
+	•	Email
+	•	Phone
+	•	ID Card Number
+	•	ID Verified (checkbox)
+	•	Purpose
+	•	Check-in Time
+	•	Check-out Time
+
+Form Submission:
+Submit to add_visitor.php and insert into visitors table.
+
+SQL Table:
+
+Already provided. You must auto-increment visitor_id.
+
+PHP Sample Insert Code:
+
+$sql = "INSERT INTO visitors (name, email, phone, id_card_number, id_verified, purpose, checkin_time, checkout_time) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssssisss", $name, $email, $phone, $id_card, $verified, $purpose, $checkin, $checkout);
+$stmt->execute();
+
+Visitor Table View:
+
+Display data from visitors using Bootstrap table.
+
+⸻
+
+4. Appointments Section
+
+Form Fields:
+	•	Select Visitor (dropdown with visitor_id)
+	•	Appointment Date (datetime picker)
+	•	Purpose
+	•	Status (pending, confirmed, cancelled, completed)
+	•	Notes
+	•	Duration (hours)
+
+Submit to PHP:
+
+Form sends data to add_appointment.php and inserts into appointments table.
+
+Display All Appointments:
+
+Use Bootstrap table or card UI.
+
+MySQL Join Example:
+
+SELECT a.*, v.name FROM appointments a
+JOIN visitors v ON a.visitor_id = v.visitor_id
+ORDER BY appointment_date DESC;
+
+
+
+⸻
+
+5. Status Section
+
+Today’s Stats:
+	•	Total Appointments today
+	•	Total Visitors today
+	•	Breakdown by status
+
+PHP Example:
+
+$today = date('Y-m-d');
+$app_query = "SELECT COUNT(*) FROM appointments WHERE DATE(appointment_date) = '$today'";
+$vis_query = "SELECT COUNT(*) FROM visitors WHERE DATE(checkin_time) = '$today'";
+
+Display:
+
+Use Bootstrap cards:
+
+<div class="card bg-success text-white">Total Appointments Today: X</div>
+
+
+
+⸻
+
+6. Reports Section
+
+Functionality:
+	•	Generate full reports with filters (by date, visitor, appointment status)
+	•	Export to PDF (using Dompdf or TCPDF)
+
+Sample PHP for PDF Export:
+
+require 'vendor/autoload.php';
+use Dompdf\Dompdf;
+
+$dompdf = new Dompdf();
+$html = '<h1>Appointment Report</h1>' . $table_html;
+$dompdf->loadHtml($html);
+$dompdf->render();
+$dompdf->stream("appointment_report.pdf");
+
+
+
+⸻
+
+Database Setup Note:
+
+Make sure to:
+	•	Set primary keys (visitor_id, appointment_id)
+	•	Use AUTO_INCREMENT
+	•	Ensure foreign key: appointments.visitor_id references visitors.visitor_id
+
+⸻
+
+User Interface/Experience (UI/UX):
+	•	Consistent Bootstrap 5 Theme
+	•	Sidebar Navigation with FontAwesome icons
+	•	Use modals for forms (visitors, appointments)
+	•	Calendar interaction for bookings
+	•	Responsive Design (mobile friendly)
+
+⸻
+
+Folder Structure Suggestion:
+
+/reception_dashboard
+│
+├── index.php
+├── navbar.php
+├── calendar.php
+├── visitors.php
+├── appointments.php
+├── status.php
+├── reports.php
+│
+├── css/
+│   └── style.css
+├── js/
+│   └── scripts.js
+├── php/
+│   ├── db_connect.php
+│   ├── add_visitor.php
+│   ├── add_appointment.php
+│   ├── get_events.php
+│   └── generate_report.php
+
+
+
+⸻

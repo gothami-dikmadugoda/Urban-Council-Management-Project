@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title></title>
+            <style>
+                body {
+                    font-family: "Arial", sans-serif;
+                    margin: 0;
+                    padding: 20px;
+                    background: #fff;
+                    color: #333;
+                    line-height: 1.6;
+                }
+                .jasper-report {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    background: white;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                }
+                .report-header {
+                    text-align: center;
+                    padding: 20px;
+                    border-bottom: 2px solid #2c3e50;
+                    position: relative;
+                }
+                .logo {
+                    max-width: 120px;
+                    position: absolute;
+                    left: 20px;
+                    top: 20px;
+                }
+                .report-title {
+                    font-size: 24px;
+                    color: #2c3e50;
+                    margin: 0;
+                    padding: 10px 0;
+                }
+                .report-meta {
+                    color: #666;
+                    font-size: 12px;
+                    margin-top: 10px;
+                }
+                .summary-section {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 20px;
+                    gap: 15px;
+                }
+                .summary-box {
+                    flex: 1;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border: 1px solid #e9ecef;
+                    border-radius: 4px;
+                    text-align: center;
+                }
+                .summary-box h3 {
+                    margin: 0;
+                    font-size: 14px;
+                    color: #495057;
+                    text-transform: uppercase;
+                }
+                .summary-box p {
+                    margin: 10px 0 0;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #2c3e50;
+                }
+                .report-section {
+                    margin: 30px 20px;
+                }
+                .section-title {
+                    font-size: 18px;
+                    color: #2c3e50;
+                    margin-bottom: 15px;
+                    padding-bottom: 5px;
+                    border-bottom: 2px solid #e9ecef;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 15px 0;
+                    font-size: 13px;
+                }
+                th {
+                    background: #2c3e50;
+                    color: white;
+                    padding: 12px;
+                    text-align: left;
+                    font-weight: normal;
+                }
+                td {
+                    padding: 10px 12px;
+                    border-bottom: 1px solid #e9ecef;
+                }
+                tr:nth-child(even) {
+                    background: #f8f9fa;
+                }
+                .status-badge {
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    display: inline-block;
+                    min-width: 60px;
+                    text-align: center;
+                }
+                .status-pending {
+                    background: #fff3cd;
+                    color: #856404;
+                }
+                .status-resolved {
+                    background: #d4edda;
+                    color: #155724;
+                }
+                .report-footer {
+                    text-align: center;
+                    padding: 20px;
+                    font-size: 12px;
+                    color: #666;
+                    border-top: 1px solid #e9ecef;
+                }
+                @media print {
+                    body {
+                        padding: 0;
+                    }
+                    .jasper-report {
+                        box-shadow: none;
+                    }
+                    .no-print {
+                        display: none;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="jasper-report">
+                <div class="report-header">
+                    <img src="/urban2/assets/images/logo.png" alt="Logo" class="logo">
+                    <h1 class="report-title"></h1>
+                    <div class="report-meta">
+                        Generated on: 2025-04-25 18:13:28<br>
+                        Date Range: Month<br>
+                        Department: All Departments
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-box">
+                        <h3>Total Complaints</h3>
+                        <p>51</p>
+                    </div>
+                    <div class="summary-box">
+                        <h3>Resolved</h3>
+                        <p>6</p>
+                    </div>
+                    <div class="summary-box">
+                        <h3>Pending</h3>
+                        <p>30</p>
+                    </div>
+                    <div class="summary-box">
+                        <h3>Resolution Rate</h3>
+                        <p>12%</p>
+                    </div>
+                    <div class="summary-box">
+                        <h3>Avg. Resolution Time</h3>
+                        <p>-2 days</p>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h2 class="section-title">Detailed Report</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Department</th>
+                                <th>Total</th>
+                                <th>Resolved</th>
+                                <th>Pending</th>
+                                <th>Resolution Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>25/04/2025</td>
+                                <td>Engineering</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>25/04/2025</td>
+                                <td>Health</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>23/04/2025</td>
+                                <td>Health</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>21/04/2025</td>
+                                <td>Engineering</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>-11 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>21/04/2025</td>
+                                <td>Health</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>-4 days</td>
+                                <td><span class="status-badge status-pending">33%</span></td>
+                            </tr>
+                            <tr>
+                                <td>20/04/2025</td>
+                                <td>Engineering</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">25%</span></td>
+                            </tr>
+                            <tr>
+                                <td>20/04/2025</td>
+                                <td>Health</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-resolved">100%</span></td>
+                            </tr>
+                            <tr>
+                                <td>19/04/2025</td>
+                                <td>Engineering</td>
+                                <td>9</td>
+                                <td>0</td>
+                                <td>7</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>19/04/2025</td>
+                                <td>Health</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>19/04/2025</td>
+                                <td>IT</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                            <tr>
+                                <td>18/04/2025</td>
+                                <td>Engineering</td>
+                                <td>8</td>
+                                <td>1</td>
+                                <td>4</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">13%</span></td>
+                            </tr>
+                            <tr>
+                                <td>18/04/2025</td>
+                                <td>Health</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">33%</span></td>
+                            </tr>
+                            <tr>
+                                <td>17/04/2025</td>
+                                <td>Engineering</td>
+                                <td>7</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">14%</span></td>
+                            </tr>
+                            <tr>
+                                <td>17/04/2025</td>
+                                <td>Health</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0 days</td>
+                                <td><span class="status-badge status-pending">0%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="report-footer">
+                    <p>Report generated by Urban Council Management System</p>
+                    <p>Page 1 of 1</p>
+                </div>
+            </div>
+        </body>
+        </html>
