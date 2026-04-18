@@ -92,9 +92,9 @@ This module plays a key role in enabling direct interaction between citizens and
 ---
 
 ## 👥 Project Team
-Gothami Dikmadugoda – Citizen Module Development (Complaint, Feedback, Booking, Payment)
-Thamasha Nethimini – Admin Module
-Mihili De Silva  – Company / Service Management Module
+- Gothami Dikmadugoda – Citizen Module Development (Complaint, Feedback, Booking, Payment)
+- Thamasha Nethimini – Admin Module
+- Mihili De Silva  – Company / Service Management Module
 
 ---
 
